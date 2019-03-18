@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CodeliteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AnswareTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QusID" Type="bigint" />
+    <Property Name="Answer" Type="nvarchar(max)" />
+    <Property Name="CorrectAns" Type="bit" />
+    <Property Name="Image" Type="image" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="ProjectFilePath" Type="nvarchar(max)" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="FullName" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="ContactNo" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="QuestionTable">
+    <Key>
+      <PropertyRef Name="QusID" />
+    </Key>
+    <Property Name="QusID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Question" Type="nvarchar(max)" />
+    <Property Name="Type" Type="nvarchar(max)" />
+    <Property Name="Subject" Type="nvarchar(max)" />
+    <Property Name="Image" Type="image" />
+    <Property Name="Tag" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="QuestionType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remarks" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="user_Credential">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_Name" Type="nvarchar" MaxLength="4000" />
+    <Property Name="user_passWord" Type="varchar(max)" />
+    <Property Name="user_FirstName" Type="nvarchar" MaxLength="4000" />
+    <Property Name="User_LastName" Type="nvarchar" MaxLength="4000" />
+    <Property Name="user_email" Type="varchar(max)" />
+    <Property Name="user_registered_Date" Type="varchar(max)" />
+    <Property Name="Activity" Type="bit" />
+    <Property Name="display_name" Type="varchar(max)" />
+    <Property Name="User_Image" Type="image" />
+    <Property Name="User_Address" Type="varchar(max)" />
+    <Property Name="User_Country" Type="varchar(max)" />
+    <Property Name="User_PostalCode" Type="int" />
+    <Property Name="User_Abouts" Type="varchar(max)" />
+    <Property Name="SALT" Type="varbinary(max)" />
+    <Property Name="HASH" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK_AnswareTable_QuestionTable">
+    <End Role="QuestionTable" Type="Self.QuestionTable" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AnswareTable" Type="Self.AnswareTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionTable">
+        <PropertyRef Name="QusID" />
+      </Principal>
+      <Dependent Role="AnswareTable">
+        <PropertyRef Name="QusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CodeliteModelStoreContainer">
+    <EntitySet Name="AnswareTable" EntityType="Self.AnswareTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestionTable" EntityType="Self.QuestionTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestionType" EntityType="Self.QuestionType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_Credential" EntityType="Self.user_Credential" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AnswareTable_QuestionTable" Association="Self.FK_AnswareTable_QuestionTable">
+      <End Role="QuestionTable" EntitySet="QuestionTable" />
+      <End Role="AnswareTable" EntitySet="AnswareTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

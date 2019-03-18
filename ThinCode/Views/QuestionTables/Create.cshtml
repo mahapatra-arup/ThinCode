@@ -1,0 +1,105 @@
+﻿@model ThinCode.Models.QuestionTable
+@using ThinCode.Models.Tools.SoftTools
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .no-close .ui-dialog-titlebar-close {
+        display: none;
+    }
+</style>
+<div id="dialogForQuestion" title="Question">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Question, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Question, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Question, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.DropDownListFor(model => model.Type, QuestionTypeUtils.GetQuestionType(), "--Select--", new Dictionary<string, object> { { "class", "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Tag, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Tag, new { @class = "form-control", style = "width:100%" })
+                    @Html.ValidationMessageFor(model => model.Tag, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="@WebTools.GetPreviousLink()" class="fa fa-arrow-circle-o-left">Back</a>
+                    <input type="submit" value="Create" class="ui-button ui-widget ui-corner-all float-right" />
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#dialogForQuestion").dialog({
+                height: "auto",
+                width: 600,
+                modal: true,
+
+
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                        //previous page
+                        window.history.back();
+                    }
+                }
+            });
+        });
+
+
+    </script>
+}

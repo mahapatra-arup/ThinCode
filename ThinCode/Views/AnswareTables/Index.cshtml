@@ -1,0 +1,151 @@
+﻿@model IEnumerable<ThinCode.Models.AnswareTable>
+@using ThinCode
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<asp:panel runat="server" class="card border border-light">
+    <div class="card-header">
+        @*@Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary rounded-circle float-right" })*@
+        <button onclick="document.getElementById('id01').style.display='block'"
+                class="ui-button ui-widget ui-corner-all rounded-circle float-right">
+            Create New
+        </button>
+    </div>
+
+    <div class="w3-responsive card-body">
+
+        <table id="questable" class="w3-table-all w3-table table-striped w3-border-blue text-center display">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Question")
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Answer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CorrectAns)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Remarks)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProjectFilePath)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ContactNo)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Tag")
+                    </th>
+                    <th></th>
+                </tr>
+            <thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="background-color:white">
+                        <td>
+                            @Html.Raw(item.QuestionTable.Question)
+                        </td>
+                        <td>
+                            @Html.Raw(item.Answer)
+                            @*@{ var s = HttpUtility.HtmlDecode(item.Answer);}
+                                @Html.DisplayFor(ss => s)*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CorrectAns)
+                        </td>
+                        <td>
+                            @{
+                                if (item.Image.ISValidObject())
+                                {
+                                    string imageSrc = item.Image.byteArrayToWebImage().ImageUrl;
+                                    <img src="@imageSrc" width="100" height="100" />
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Remarks)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProjectFilePath)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactNo)
+                        </td>
+                        <td>
+                            @Html.Raw(item.QuestionTable.Tag)
+                        </td>
+                        <td>
+                            @Html.ActionLink("  E d i t", "Edit", new { id = item.Id }, new { @class = "btn btn-primary fa fa-edit" })
+                            @Html.ActionLink(" Details", "Details", new { id = item.Id }, new { @class = "btn btn-info fa fa-shower" })
+                            @Html.ActionLink(" Delete ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger fa fa-remove" })
+                        </td>
+                    </tr>
+                }
+            <tbody>
+
+        </table>
+
+
+    </div>
+</asp:panel>
+
+@* ===============Render Create Window=============== *@
+<div>
+    @{Html.RenderAction("Create"); }
+</div>
+
+@* ===========Text Editors============ *@
+<script type="text/javascript" src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea',  // change this value according to your html
+        plugins: 'textcolor autolink lists link image  print preview anchor  visualblocks code fullscreen   table contextmenu paste',
+
+        toolbar:
+            'forecolor backcolor  undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist indent | link image'
+    });
+</script>
+@* ===========//Text Editors============ *@
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @* ===========For Datatable============ *@
+    <script>
+        $(document).ready(function () {
+            $('#questable').dataTable();
+        });
+    </script>
+
+}
+
+

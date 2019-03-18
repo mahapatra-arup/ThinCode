@@ -1,0 +1,153 @@
+﻿@model ThinCode.Models.AnswareTable
+
+@{
+//ViewBag.Title = "Create";
+//Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "AnswareTables", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @ViewBag.result
+    <div class="form-horizontal">
+        <div id="id01" class="w3-modal" @*style="display:block"*@>
+            <div class="w3-modal-content w3-animate-top w3-card-4">
+                <header class="w3-container w3-grayscale">
+                    @Html.ActionLink("X", "Index", new { }, new { @class = "w3-button w3-red w3-display-topright" })
+                    <h2>Answare Table ::</h2>
+                </header>
+
+                <hr />
+
+                <div class="w3-container  m-3">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @* ======row 1====== *@
+                    <div class="row m-1">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.QusID, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="input-group">
+                                @Html.DropDownListFor(model => model.QusID, QuestionsUtils.GetQuestions(), "--Select--", new Dictionary<string, object> { { "class", "form-control" },{ "aria_describedby", "btnAddQuestion" },{"aria_label","Question" } })
+                                @Html.ValidationMessageFor(model => model.QusID, "", new { @class = "text-danger" })
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="btnAddQuestion"
+                                            onclick="location.href='@Url.Action("Create", "QuestionTables")'">
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* ======row 2====== *@
+                    @*ref: https://www.completecsharptutorial.com/asp-net-mvc5/html-textarea-and-html-textareafor-example-in-asp-net-mvc.php *@
+                    <div class="row m-1">
+                        @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.Answer, new { @class = "form-control",  @value = "Enter Answare",
+                           //@disabled="true",
+                          // cols = "50",
+                          // rows = "10",
+                           @title = "Please Enter Your Answare",
+                           @tabindex = "0",
+                          // @accesskey="z",
+                           @align = "left",
+                           @autofocus = "true",
+                          // @style = "background-color:yellow; font-weight:bold",
+                           @draggable = "true",
+                           //@hidden="true",
+                           //@maxlength="12",
+                           @minlength = "10",
+                           //@required = "true"
+                       })
+                            @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @* ======row 3====== *@
+                    <div class="row m-1">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CorrectAns, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.CorrectAns)
+                                @Html.ValidationMessageFor(model => model.CorrectAns, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input type="file" id="_answareimage" name="_answareimage" />
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control",  @type = "date" } })
+                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @* ======row 4====== *@
+                    <div class="row m-1">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.TextAreaFor(model => model.Remarks)
+                            @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @* ======row 5====== *@
+                    <div class="row m-1">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.ProjectFilePath, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.ProjectFilePath, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProjectFilePath, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @* ======row 6====== *@
+                    <div class="row m-1">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-12" })
+                            @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-12  mt-4">
+                            <button type="submit" value="Create" class="btn w3-green w3-display-bottomright " formaction="@Url.Action("Create", "AnswareTables")"><span class="glyphicon glyphicon-floppy-saved"> Save</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="w3-container w3-teal"></footer>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@*<script>
+    window.onload = function () { document.getElementById("id01").style.display = "block"; }
+
+</script>*@

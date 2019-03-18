@@ -1,0 +1,106 @@
+﻿@model ThinCode.Models.LogInVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>User Login</title>
+    @Scripts.Render("~/bundles/jquery")
+
+    @Styles.Render("~/Content/allcssbundile")
+    @Styles.Render("~/Content/appcss")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @* ================jquery ui  Css================ *@
+    <link href="~/jquery_ui/jquery-ui.min.css" rel="stylesheet" />
+    @* ================//jquery ui and mobile================ *@
+
+    @* ====================Use for Hide diaalog Box Close Button=========== *@
+    <style type="text/css">
+        .ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
+            display: none;
+        }
+    </style>
+    @* ====================//Use for Hide diaalog Box Close Button=========== *@
+
+</head>
+<body>
+
+   
+
+    <div id="dialogForLogIn" title="Log In">
+
+        @using (Html.BeginForm("UserLogin", "User", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ReturnURL)
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "Login failed. Check your login details.", new { @class = "text-danger" })
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label for="IsRememberMe">
+                            @Html.CheckBoxFor(model => model.IsRememberMe)
+                            Remember me
+                        </label>
+
+                    </div>
+                </div>
+
+                <input id="btnlogin" type="submit" value="Log In" title="LogIn" hidden />
+            </div>
+        }
+    </div>
+
+
+
+    <script>
+
+//Dialog
+        $(function () {
+            $("#dialogForLogIn").dialog({
+                modal: true,
+                buttons: [
+                    {
+                        text: "Log In",
+                        click: function () {
+                            $("#btnlogin").click();
+                        }
+                    }
+                ]
+            });
+        });
+
+    </script>
+   
+    @Scripts.Render("~/bundles/bootstrap")
+    @* ================jquery ui ================ *@
+    <script src="~/jquery_ui/jquery-ui.min.js"></script>
+    @* ================jquery ui================ *@
+
+</body>
+</html>

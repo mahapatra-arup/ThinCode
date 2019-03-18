@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/allcssbundile")
+    @Styles.Render("~/Content/appcss")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @* ================jquery ui  Css================ *@
+    <link href="~/jquery_ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/jquery_ui/theme.css" rel="stylesheet" />
+    @* ================//jquery ui and mobile================ *@
+
+
+
+    @* ================//Datatale================ *@
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    @* ================//Datatale================ *@
+
+</head>
+
+
+<body onload="w3_open()">
+
+    @* ======Slider==== *@
+    <div class="w3-sidebar w3-bar-block w3-animate-left bg-light w3-card w3-center w3-block" style="display:none;z-index:99999" id="mySidebar">
+
+        <div class="">
+            <button class="w3-bar-item w3-red w3-border-bottom w3-border-green w3-card" onclick="w3_close()">
+                <span class="float-right ui-icon ui-icon-close ui-button ui-widget ui-corner-all ">.</span>
+            </button>
+            <img src="~/FileFolder/Image/logo.png" class="w3-circle w3-card-4 w3-margin-bottom w3-margin-top" alt="logo" width="120" height="120">
+        </div>
+
+
+
+        @* ===========Link============= *@
+        <div>
+            @* ------link 1---- *@
+            <button class="w3-bar-item w3-btn w3-block w3-red w3-left-align w3-card w3-hover-blue-gray fa fa-question-circle" type="button" id="btnAddQuestion"
+                    onclick="location.href='@Url.Action("Index", "QuestionTables")'">
+                Question<span class="float-right   fa fa-angle-right"></span>
+            </button>
+
+            @* ------link2---- *@
+            <button class="w3-bar-item w3-btn w3-block w3-red w3-left-align w3-card w3-hover-blue-gray fa fa-address-card" type="button" id="btnAddQuestion"
+                    onclick="location.href='@Url.Action("Index", "AnswareTables")'">
+                Answare<span class="float-right   fa fa-angle-right"></span>
+            </button>
+
+
+
+            @* ------link 3---- *@
+            <button class="w3-bar-item w3-btn w3-block w3-red w3-left-align w3-card w3-hover-blue-gray fa fa-tasks" type="button" id="btnAddQuestion"
+                    onclick="location.href='@Url.Action("Index", "QuestionTypes")'">
+                Question Types<span class="float-right   fa fa-angle-right"></span>
+            </button>
+
+
+
+            @* ------link 4---- *@
+            <button class="w3-bar-item w3-btn w3-block w3-red w3-left-align w3-card w3-hover-blue-gray fa fa-users" type="button" id="btnAddQuestion"
+                    onclick="location.href='@Url.Action("Index", "user_Credential")'">
+                User Credential
+                <span class="float-right   fa fa-angle-right"></span>
+            </button>
+        </div>
+
+    </div>
+
+    <div id="main">
+
+        @* ======Head Part===== *@
+        <div class="w3-teal">
+            <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+            <div class="w3-bar w3-light-grey w3-border">
+                <a href="#" class="w3-bar-item w3-button w3-green"><i class="fa fa-home"></i></a>
+                <a href="#" class="w3-bar-item w3-button"><i class="fa fa-search"></i></a>
+                <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+                <a href="#" class="w3-bar-item w3-button"><i class="fa fa-globe"></i></a>
+                <a href="#" class="w3-bar-item w3-button"><i class="fa fa-sign-in"></i></a>
+            </div>
+
+        </div>
+
+        @* =======Body====== *@
+        <div class="clearfix"></div>
+        <div>
+            @RenderBody()
+        </div>
+
+
+
+    </div>
+
+
+    @* =====Page Script==== *@
+    <script>
+        function w3_open() {
+            document.getElementById("main").style.marginLeft = "15%";
+            document.getElementById("mySidebar").style.width = "180px";
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("openNav").style.display = 'none';
+        }
+        function w3_close() {
+            document.getElementById("main").style.marginLeft = "0%";
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("openNav").style.display = "inline-block";
+        }
+    </script>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @* ================jquery ui ================ *@
+    <script src="~/jquery_ui/jquery-ui.min.js"></script>
+    @* ================jquery ui================ *@
+
+    @RenderSection("scripts", required: false)
+    @* ================//Datatale================ *@
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    @* ================//Datatale================ *@
+
+    @* =====Remove Add============ *@
+    <script>$(document).ready(function () { $("div[style='opacity: 0.9; z-index: 2147483647; position: fixed; left: 0px; bottom: 0px; height: 65px; right: 0px; display: block; width: 100%; background-color: #202020; margin: 0px; padding: 0px;']").remove(); $("div[style='margin: 0px; padding: 0px; left: 0px; width: 100%; height: 65px; right: 0px; bottom: 0px; display: block; position: fixed; z-index: 2147483647; opacity: 0.9; background-color: rgb(32, 32, 32);']").remove(); $("div[onmouseover='S_ssac();']").remove(); $("center").remove(); });</script>
+    @* =====//Remove Add============ *@
+</body>
+</html>

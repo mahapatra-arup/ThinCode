@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+
+    @Styles.Render("~/Content/allcssbundile")
+    @Styles.Render("~/Content/appcss")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @* ================jquery ui and mobile Css================ *@
+    <link href="~/jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/jquery-ui-1.11.4/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/jquery-ui-1.11.4/jquery-ui.structure.min.css" rel="stylesheet" />
+   @* ================//jquery ui and mobile================ *@
+
+</head>
+<body>
+    <div class="w3-top">
+        <div class="w3-bar w3-border w3-light-grey w3-card-4">
+            @Html.ActionLink("ThinCode", "Index", "Home", new { @class = "w3-bar-item w3-button w3-border-right w3-green fa fa-home" })
+
+            @Html.ActionLink("About", "About", "Home", new { @class = "w3-bar-item w3-button w3-border-right" })
+            @Html.ActionLink("Contact", "Contact", "Home", new { @class = "w3-bar-item w3-button w3-border-right" })
+
+
+            @*======== login====== *@
+            <button class="w3-bar-item w3-button w3-border-right float-right fa fa-sign-in w3-green" type="button" id="btnAddQuestion"
+                    onclick="location.href='@Url.Action("Index", "AnswareTables")'">
+                LogIn
+            </button>
+        </div>
+
+        @*====== Design==== *@
+        <div class="w3-bar w3-red">
+            <div class="w3-bar-item"></div>
+        </div>
+    </div>
+
+
+
+    <div class="w3-container body-content">
+        @RenderBody()
+        <hr />
+
+        <footer>
+            <p>&copy; @DateTime.Now.Year - || Developed By *Arup Mahapatra*</p>
+        </footer>
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @* ================jquery ui and mobile js================ *@
+    <script src="~/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    @* ================jquery ui and mobile Css================ *@
+
+
+    @* =====Remove Add============ *@
+    <script>$(document).ready(function () { $("div[style='opacity: 0.9; z-index: 2147483647; position: fixed; left: 0px; bottom: 0px; height: 65px; right: 0px; display: block; width: 100%; background-color: #202020; margin: 0px; padding: 0px;']").remove(); $("div[style='margin: 0px; padding: 0px; left: 0px; width: 100%; height: 65px; right: 0px; bottom: 0px; display: block; position: fixed; z-index: 2147483647; opacity: 0.9; background-color: rgb(32, 32, 32);']").remove(); $("div[onmouseover='S_ssac();']").remove(); $("center").remove(); });</script>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

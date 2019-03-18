@@ -1,0 +1,137 @@
+﻿@model IEnumerable<ThinCode.Models.user_Credential>
+
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="tblUser" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.user_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user_passWord)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user_FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User_LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user_email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user_registered_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.display_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User_Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User_Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User_Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User_PostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User_Abouts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HASH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SALT)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_passWord)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_registered_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.display_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Abouts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HASH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SALT)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @* ===========For Datatable============ *@
+    <script>
+        $(document).ready(function () {
+            $('#tblUser').DataTable({
+                "scrollY": true,//we can use px like 200px
+                "scrollX": true
+            });
+        });
+    </script>
+
+}

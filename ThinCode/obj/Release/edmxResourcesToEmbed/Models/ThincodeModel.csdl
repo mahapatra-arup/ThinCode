@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CodeliteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CodeliteEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AnswareTables" EntityType="CodeliteModel.AnswareTable" />
+    <EntitySet Name="QuestionTables" EntityType="CodeliteModel.QuestionTable" />
+    <EntitySet Name="QuestionTypes" EntityType="CodeliteModel.QuestionType" />
+    <EntitySet Name="sysdiagrams" EntityType="CodeliteModel.sysdiagram" />
+    <EntitySet Name="user_Credential" EntityType="CodeliteModel.user_Credential" />
+    <AssociationSet Name="FK_AnswareTable_QuestionTable" Association="CodeliteModel.FK_AnswareTable_QuestionTable">
+      <End Role="QuestionTable" EntitySet="QuestionTables" />
+      <End Role="AnswareTable" EntitySet="AnswareTables" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AnswareTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QusID" Type="Int64" />
+    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectAns" Type="Boolean" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectFilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="QuestionTable" Relationship="CodeliteModel.FK_AnswareTable_QuestionTable" FromRole="AnswareTable" ToRole="QuestionTable" />
+  </EntityType>
+  <EntityType Name="QuestionTable">
+    <Key>
+      <PropertyRef Name="QusID" />
+    </Key>
+    <Property Name="QusID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Tag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AnswareTables" Relationship="CodeliteModel.FK_AnswareTable_QuestionTable" FromRole="QuestionTable" ToRole="AnswareTable" />
+  </EntityType>
+  <EntityType Name="QuestionType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user_Credential">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_Name" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="user_passWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="user_FirstName" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="User_LastName" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="user_email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="user_registered_Date" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Activity" Type="Boolean" />
+    <Property Name="display_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="User_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="User_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="User_Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="User_PostalCode" Type="Int32" />
+    <Property Name="User_Abouts" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SALT" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="HASH" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_AnswareTable_QuestionTable">
+    <End Type="CodeliteModel.QuestionTable" Role="QuestionTable" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="CodeliteModel.AnswareTable" Role="AnswareTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionTable">
+        <PropertyRef Name="QusID" />
+      </Principal>
+      <Dependent Role="AnswareTable">
+        <PropertyRef Name="QusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,123 @@
+﻿@model ThinCode.Models.user_Credential
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>user_Credential</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_passWord)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_passWord)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_registered_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_registered_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.display_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.display_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_PostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_PostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Abouts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Abouts)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ThinCode.Models.QuestionTable>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<asp:panel runat="server" class="card border border-light">
+    <div class="card-header">
+        @Html.ActionLink("Create New", "Create", new { }, new { @class = "ui-button ui-widget ui-corner-all float-right" })
+
+    </div>
+
+
+    <div class="w3-responsive card-body">
+
+        <table id="questable" class="w3-table-all w3-table table-striped w3-border-blue text-center display">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Question)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Subject)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tag)
+                    </th>
+                    <th></th>
+                </tr>
+            <thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Question)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Subject)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Image)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tag)
+                        </td>
+                        <td>
+                            @Html.ActionLink(" Edit ", "Edit", new { id = item.QusID }, new { @class = "btn btn-info fa fa-close" })
+                            @Html.ActionLink(" Delete", "Delete", new { id = item.QusID }, new { @class = "btn btn-danger fa fa-close" })
+                        </td>
+                    </tr>
+                }
+            <tbody>
+        </table>
+    </div>
+</asp:panel>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @* ===========For Datatable============ *@
+    <script>
+        $(document).ready(function () {
+            $('#questable').dataTable();
+        });
+    </script>
+
+}
